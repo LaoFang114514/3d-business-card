@@ -2,7 +2,7 @@
 
 # 🪪 3D 名片
 
-**一个 3D 电子名片展示网页 ——**
+**一个 3D 电子名片展示网页**
 
 [在线演示1](https://stiff-ivory-owrr3tap.edgeone.dev/) ·
 [在线演示2](https://laofang114514.github.io/3d-business-card/) ·
@@ -47,7 +47,7 @@
 
 # 🪪 3D Business Card
 
-**A 3D digital business card showcase webpage ——**
+**A 3D digital business card showcase webpage**
 
 [Live Demo 1](https://stiff-ivory-owrr3tap.edgeone.dev/) ·
 [Live Demo 2](https://laofang114514.github.io/3d-business-card/) ·
