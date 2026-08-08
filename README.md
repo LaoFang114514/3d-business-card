@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🪪 3D Business Card
+# 🪪 3D 名片
 
 **一个 3D 电子名片展示网页 ——**
 
