@@ -4,7 +4,7 @@
 
 **一个 3D 电子名片展示网页 ——**
 
-[在线演示](https://laofang114514.github.io/3d-business-card/) ·
+[在线演示](https://stiff-ivory-owrr3tap.edgeone.dev/) ·
 [GitHub](https://github.com/LaoFang114514/3d-business-card) ·
 [GitCode](https://gitcode.com/LaoFang233/3d-business-card)
 
@@ -48,7 +48,7 @@
 
 **A 3D digital business card showcase webpage ——**
 
-[Live Demo](https://laofang114514.github.io/3d-business-card/) ·
+[Live Demo](https://stiff-ivory-owrr3tap.edgeone.dev/) ·
 [GitHub](https://github.com/LaoFang114514/3d-business-card) ·
 [GitCode](https://gitcode.com/LaoFang233/3d-business-card)
 
