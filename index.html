@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN" mdui-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>3D 名片</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+  <header class="header">
+    <!-- 改名字 -->
+    <div class="title">松鼠老方的电子名片</div>
+  </header>
+
+  <main class="stage">
+    <div class="scene" id="scene">
+      <div class="card-shadow" id="cardShadow"></div>
+      <div class="card" id="card">
+        <!-- 名片正面和背面，可以改路径 -->
+        <div class="face front"><img src="front.png" alt="名片正面" draggable="false"></div>
+        <div class="face back"><img src="back.png" alt="名片背面" draggable="false"></div>
+        <div class="core"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <!-- main.js改网站跳转，图标可以看 https://www.mdui.org/zh-cn/docs/2/libraries/icons  -->
+    <div class="bar">
+      <mdui-fab id="about" variant="tonal" class="ctrl" title="关于">
+        <svg class="fab-icon" slot="icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-6h2v6zm0-8h-2V8h2v2z"></path>
+        </svg>
+        <span class="label">关于</span>
+      </mdui-fab>
+      <mdui-fab id="toggle" variant="filled" class="ctrl">
+        <svg class="fab-icon" slot="icon" viewBox="0 0 24 24" fill="currentColor">
+          <path id="iconPath" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path>
+        </svg>
+        <span class="label" id="label">暂停旋转</span>
+      </mdui-fab>
+      <mdui-fab id="home" variant="tonal" class="ctrl" title="主页">
+        <svg class="fab-icon" slot="icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+        </svg>
+        <span class="label">主页</span>
+      </mdui-fab>
+    </div>
+  </footer>
+</div>
+
+<mdui-dialog id="aboutDialog" close-on-overlay-click close-on-esc>
+  <div class="about-body">
+    <div class="about-title">松鼠老方的电子名片</div>
+    <div class="about-links">
+      <a href="https://github.com/LaoFang114514/3d-business-card" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://gitcode.com/LaoFang233/3d-business-card" target="_blank" rel="noopener noreferrer">GitCode</a>
+      <a href="https://www.mdui.org/" target="_blank" rel="noopener noreferrer">基于MDUI</a>
+    </div>
+  </div>
+  <mdui-button slot="action" variant="tonal" id="aboutClose">关闭</mdui-button>
+</mdui-dialog>
+
+<script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
