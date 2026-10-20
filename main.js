@@ -1,6 +1,6 @@
 /* ============================================================
    本文件是网页的实现逻辑，日常不需要动。
-   名片上的标题、图片、社交媒体、关于弹窗，全部在 config.js 里改。
+   标题、图片、社交媒体和关于弹窗的文字都在 config.js 里改。
    ============================================================ */
 
 const DEFAULTS = {
@@ -9,8 +9,14 @@ const DEFAULTS = {
   背面图片: 'back.png',
   旋转速度: 0.05,
   社交媒体: [],
-  关于: { 标题: '关于', 链接: [], 版权: '', 备案: [] },
+  关于: { 标题: '关于', 版权: '', 备案: [] },
 };
+
+const ABOUT_LINKS = [
+  { 名称: '3d-business-card', 链接: 'https://github.com/LaoFang114514/3d-business-card' },
+  { 名称: 'by LaoFang', 链接: 'https://squirrellaofang.top/' },
+  { 名称: '部分元素使用 MDUI', 链接: 'https://www.mdui.org/', 换行: true },
+];
 
 const raw = window.名片配置 || {};
 const cfg = Object.assign({}, DEFAULTS, raw);
@@ -213,7 +219,7 @@ document.getElementById('aboutClose').addEventListener('click', () => {
 document.getElementById('aboutTitle').textContent = cfg.关于.标题;
 const aboutLinks = document.getElementById('aboutLinks');
 let aboutLine = null;
-(cfg.关于.链接 || []).forEach((item) => {
+ABOUT_LINKS.forEach((item) => {
   if (!item || !item.链接) return;
   if (!aboutLine || item.换行) {
     aboutLine = document.createElement('div');
