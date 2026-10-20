@@ -1,0 +1,348 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+/* 亮色 / 暗色主题：把 mdui 默认的淡紫配色换成中性黑白灰 */
+:root {
+  --mdui-color-primary-light: 28, 28, 30;
+  --mdui-color-on-primary-light: 255, 255, 255;
+  --mdui-color-primary-container-light: 240, 240, 240;
+  --mdui-color-on-primary-container-light: 28, 28, 30;
+  --mdui-color-secondary-container-light: 243, 243, 243;
+  --mdui-color-on-secondary-container-light: 28, 28, 30;
+  --mdui-color-surface-light: 255, 255, 255;
+  --mdui-color-on-surface-light: 28, 28, 30;
+  --mdui-color-surface-variant-light: 245, 245, 245;
+  --mdui-color-on-surface-variant-light: 90, 90, 90;
+  --mdui-color-surface-container-lowest-light: 255, 255, 255;
+  --mdui-color-surface-container-low-light: 255, 255, 255;
+  --mdui-color-surface-container-light: 255, 255, 255;
+  --mdui-color-surface-container-high-light: 255, 255, 255;
+  --mdui-color-surface-container-highest-light: 250, 250, 250;
+  --mdui-color-outline-light: 160, 160, 160;
+  --mdui-color-outline-variant-light: 226, 226, 226;
+  --mdui-color-inverse-primary-light: 220, 220, 220;
+
+  --mdui-color-primary-dark: 235, 235, 238;
+  --mdui-color-on-primary-dark: 28, 28, 30;
+  --mdui-color-primary-container-dark: 58, 58, 62;
+  --mdui-color-on-primary-container-dark: 235, 235, 238;
+  --mdui-color-secondary-container-dark: 44, 44, 48;
+  --mdui-color-on-secondary-container-dark: 235, 235, 238;
+  --mdui-color-surface-dark: 18, 19, 21;
+  --mdui-color-on-surface-dark: 235, 235, 238;
+  --mdui-color-surface-variant-dark: 42, 42, 46;
+  --mdui-color-on-surface-variant-dark: 180, 180, 186;
+  --mdui-color-surface-container-lowest-dark: 14, 15, 16;
+  --mdui-color-surface-container-low-dark: 22, 23, 25;
+  --mdui-color-surface-container-dark: 26, 27, 29;
+  --mdui-color-surface-container-high-dark: 32, 33, 36;
+  --mdui-color-surface-container-highest-dark: 38, 39, 42;
+  --mdui-color-outline-dark: 130, 130, 136;
+  --mdui-color-outline-variant-dark: 60, 60, 64;
+  --mdui-color-inverse-primary-dark: 50, 50, 54;
+
+  /* 页面自己的颜色 */
+  --page-bg: #f2f2f2;
+  --title-color: #1a1a1a;
+  --sub-color: #555;
+  --glass-bg: rgba(255, 255, 255, .8);
+  --glass-border: rgba(0, 0, 0, .08);
+  --glass-shadow: rgba(0, 0, 0, .08);
+  --title-shadow: 0 6px 24px rgba(0, 0, 0, .06);
+  --face-ring: rgba(0, 0, 0, .06);
+  --press-overlay: rgba(0, 0, 0, .14);
+}
+html.mdui-theme-dark {
+  --page-bg: #121315;
+  --title-color: #f0f0f2;
+  --sub-color: #b8b8bd;
+  --glass-bg: rgba(28, 29, 32, .78);
+  --glass-border: rgba(255, 255, 255, .1);
+  --glass-shadow: rgba(0, 0, 0, .5);
+  --title-shadow: 0 6px 24px rgba(0, 0, 0, .45);
+  --face-ring: rgba(255, 255, 255, .08);
+  --press-overlay: rgba(255, 255, 255, .14);
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body {
+  font-family: Roboto, "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  background: var(--page-bg);
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+.page {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  position: relative;
+  z-index: 10;   /* 放大/旋转时名片不覆盖标题 */
+  padding: max(18px, env(safe-area-inset-top)) 24px 0;
+  text-align: center;
+  user-select: none;
+  pointer-events: none;
+}
+.title {
+  display: inline-block;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: var(--title-color);
+  padding: 10px 28px;
+  border-radius: 999px;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--title-shadow);
+}
+.sub {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--sub-color);
+  opacity: .72;
+  letter-spacing: 1px;
+}
+.stage {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.scene {
+  position: relative;
+  width: min(90vw, 480px);
+  aspect-ratio: 5 / 3;
+  perspective: 1400px;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+.scene:active { cursor: grabbing; }
+.card {
+  --t: 3px;             /* 卡片厚度（正反面各偏移 ±t/2，中间由纸芯填充） */
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.face {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: inset 0 0 0 1px var(--face-ring);
+}
+.face img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+.front { transform: translateZ(calc(var(--t) / 2)); }
+.back { transform: rotateY(180deg) translateZ(calc(var(--t) / 2)); }
+/* 卡片纸芯：与图片同轮廓（同圆角）垫在正反面之间，厚度 = --t */
+.core {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #e6e6e6, #fafafa 50%, #dedede);
+}
+.footer {
+  position: relative;
+  z-index: 10;   /* 放大/旋转时按钮不被名片覆盖 */
+  padding: 0 16px max(24px, env(safe-area-inset-bottom));
+  display: flex;
+  justify-content: center;
+}
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 36px var(--glass-shadow);
+}
+mdui-fab.ctrl {
+  --shape-corner-normal: 999px;   /* MDUI 官方圆角变量：胶囊形 */
+  font-size: 15px;
+  /* 通过 mdui elevation token 去掉按钮阴影（fab 常态用 level3，按压/hover 会跳级） */
+  --mdui-elevation-level1: none;
+  --mdui-elevation-level2: none;
+  --mdui-elevation-level3: none;
+  --mdui-elevation-level4: none;
+  --mdui-elevation-level5: none;
+}
+/* 触摸遮罩（Material 状态层：按下时按钮表面浮现半透明遮罩） */
+mdui-fab.ctrl::part(button) {
+  position: relative;
+  overflow: hidden;
+}
+mdui-fab.ctrl::part(button)::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--shape-corner-normal);
+  background: var(--press-overlay);
+  opacity: 0;
+  transition: opacity .12s ease;
+  pointer-events: none;
+}
+mdui-fab.ctrl.pressed::part(button)::after { opacity: 1; }
+@media (hover: hover) {
+  mdui-fab.ctrl:hover::part(button)::after { opacity: .5; }
+}
+.fab-icon { width: 24px; height: 24px; display: block; }
+@media (max-width: 560px) {
+  .bar { gap: 10px; padding: 10px 12px; }
+  .ctrl .label { display: none; }
+}
+/* 关于弹窗（API 见 mdui 官方文档：close-on-overlay-click / close-on-esc / action slot / ::part(dialog)） */
+#aboutDialog::part(dialog) { border-radius: 28px; }
+.about-body { text-align: center; padding: 8px 0 4px; }
+.about-title {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: rgb(var(--mdui-color-on-surface));
+  margin-bottom: 12px;
+}
+.about-links {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  line-height: 1.9;
+  color: rgba(var(--mdui-color-on-surface), .55);
+}
+.about-line {
+  display: flex;
+  justify-content: center;
+  gap: .35em;
+}
+.about-links a {
+  flex: none;
+  text-align: center;
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+}
+/* 版权与备案（内容在 config.js 的「关于」里改） */
+.about-footer {
+  margin: 12px auto 0;
+  max-width: 232px;   /* 与弹窗原有内容宽度一致，避免备案号把弹窗撑宽 */
+  font-size: 12px;
+  line-height: 1.9;
+  color: rgba(var(--mdui-color-on-surface), .55);
+}
+/* 短分割线：居中，不再横穿整个弹窗 */
+.about-footer::before {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 1px;
+  margin: 0 auto 10px;
+  background: rgba(var(--mdui-color-on-surface), .14);
+}
+.about-footer a {
+  color: inherit;
+  text-decoration: none;
+}
+.about-beian a {
+  display: block;
+}
+@media (hover: hover) {
+  .about-footer a:hover, .about-links a:hover { color: rgb(var(--mdui-color-primary)); }
+}
+/* 关闭按钮全宽 */
+#aboutClose {
+  width: 100%;
+}
+#aboutClose::part(button) {
+  width: 100%;
+  justify-content: center;
+}
+
+/* ---- 社交媒体栏：点「社交」按钮时在原位向上展开成一排图标 ---- */
+.social-tray {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% + 6px);
+  width: fit-content;
+  max-width: calc(100vw - 24px);
+  margin-inline: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  border-radius: 999px;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 30px var(--glass-shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px) scale(.94);
+  transform-origin: bottom center;
+  transition: opacity .18s ease, transform .22s cubic-bezier(.2, .8, .2, 1), visibility 0s linear .18s;
+}
+.social-tray::-webkit-scrollbar { display: none; }
+.social-tray.open {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+.social-item {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 999px;
+  background: rgb(var(--mdui-color-secondary-container));
+  color: rgb(var(--mdui-color-on-secondary-container));
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .12s ease;
+}
+.social-item svg { width: 21px; height: 21px; display: block; }
+.social-item:active { transform: scale(.9); }
+@media (hover: hover) {
+  .social-item:hover { filter: brightness(.95); }
+}
+/* config.js 没加载成功时的提示条 */
+.cfg-error {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  max-width: calc(100vw - 32px);
+  padding: 10px 16px;
+  border-radius: 14px;
+  background: rgb(var(--mdui-color-error-container));
+  color: rgb(var(--mdui-color-on-error-container));
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+  z-index: 100;
+}

@@ -1,0 +1,1 @@
+改config.js，上面标好哪个可以修改，修改后星辰云、cloudflare、edgeone部署什么的啥都行
